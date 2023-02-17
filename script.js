@@ -4,40 +4,47 @@ const movielist = document.querySelectorAll('.movie-list');
 
 var width = Math.round(innerWidth * 7 / 2880);
 
-var j = 0;
+var indexList = new Array(arrowsRight.length);
+
+for (var i = 0; i < indexList.length; i++) {
+    indexList[i] = new Array(3);
+    indexList[i][0] = -102;
+    indexList[i][1] = 0;
+    indexList[i][2] = 0;
+}
+
 const itemNumber = 14;
-var variable = -102;
-var generalVar = 0;
 
 arrowsRight.forEach((arrow, i) => {
     arrow.addEventListener('click', () => {
         width = Math.round(innerWidth * 7 / 2880);
         movielist[i].style.transition = "all .8s";
-        if (generalVar === 2) variable -= 102;
-        generalVar = 0;
-        if (itemNumber - (width + j * width) <= 0) {
+        if (indexList[i][2] === 2) indexList[i][0] -= 102;
+        indexList[i][2] = 0;
+        if (itemNumber - (width + indexList[i][1] * width) <= 0) {
             movielist[i].style.transform = "translateX(0)";
-            j = 0; variable = -102;
+            indexList[i][1] = 0; indexList[i][0] = -102;
         }
         else {
-            movielist[i].style.transform = `translateX(${variable}%)`;
-            variable -= 102; j++;
+            movielist[i].style.transform = `translateX(${indexList[i][0]}%)`;
+            indexList[i][0] -= 102; indexList[i][1]++;
         }
         setTimeout(() => {
-            (variable === -102) ? arrowsLeft[i].classList.remove('hidden-arrow') : arrowsLeft[i].classList.add('hidden-arrow');}
+            (indexList[i][0] === -102) ? arrowsLeft[i].classList.remove('hidden-arrow') : arrowsLeft[i].classList.add('hidden-arrow');}
             , 800);
     });
 });
 
 arrowsLeft.forEach((arrow, i) => {
     arrow.addEventListener('click', () => {
-        (!generalVar) ? variable += 204 : variable += 102;
+        (!indexList[i][2]) ? indexList[i][0] += 204 : indexList[i][0] += 102;
         width = Math.round(innerWidth * 7 / 2880);
         movielist[i].style.transition = "all .8s";
-        movielist[i].style.transform = `translateX(${variable}%)`;
-        generalVar = 2; j--;
+        movielist[i].style.transform = `translateX(${indexList[i][0]}%)`;
+        indexList[i][1]--;
+        if (!indexList[i][2]) indexList[i][2] = 2;
         setTimeout(() => {
-            (variable === 0) ? arrowsLeft[i].classList.remove('hidden-arrow') : arrowsLeft[i].classList.add('hidden-arrow');}
+            (indexList[i][0] === 0) ? arrowsLeft[i].classList.remove('hidden-arrow') : arrowsLeft[i].classList.add('hidden-arrow');}
             , 800);
     });
 });
