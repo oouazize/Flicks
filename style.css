@@ -11,6 +11,8 @@
     background-color: #151515;
     color: #f5f5f5;
     scrollbar-width: none;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 /* --------------------------------------------------------------------------- */
@@ -28,13 +30,23 @@
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 50px;
+    justify-content: space-between;
     font-family: 'Sen', sans-serif;
-    cursor: pointer;
+}
+
+.navbar-content {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .logo-container {
-    flex: 1;
+    width: 20%;
+    max-width: 200px;
+    min-width: 170px;
+    display: flex;
+    justify-content: center;
 }
 .logo {
     width: 80px;
@@ -45,14 +57,17 @@
 /* MENU CONTAINER */
 
 .menu-container {
-    flex: 6;
+    width: 50%;
 }
 .menu-list {
     display: flex;
     list-style: none;
+    max-width: 400px;
 }
 .menu-list-items {
-    margin-right: 50px;
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
 }
 
 .menu-list-items:first-child {
@@ -64,12 +79,14 @@
     color:#4dbf00
 }
 
+
+
 /* --------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------- */
 /* PROFILE CONTAINER */
 
 .profile-container {
-    flex: 2;
+    width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -80,9 +97,12 @@
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
+    cursor: pointer;
 }
 .profile-text-container {
-    margin: 0 20px;
+    margin: 0 1.125rem;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
 .toggle {
@@ -122,13 +142,14 @@
 
 .sidebar {
     height: 100%;
-    width: 50px;
+    width: 5%;
+    max-width: 50px;
     background-color: black;
     position: fixed;
     display: flex;
     align-items: center;
     flex-direction: column;
-    top: 0;
+    top: 50px;
     padding-top: 80px;
     color: #f5f5f5;
     z-index: 1;
@@ -146,7 +167,6 @@
 
 .left-menu-icons {
     font-size: 20px;
-    text-align: center;
 }
 .icons-container:hover {
     background-color: #4dbf00;
@@ -195,6 +215,7 @@
     padding: 15px 25px;
     border-radius: 100px;
     background-color: #43cd5c;
+    color: white;
     background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%),
     radial-gradient(66% 87% at 26% 20%, rgba(255, 255, 255, 0.41) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
     box-shadow: 2px 19px 31px rgba(0, 0, 0, 0.2);
@@ -202,6 +223,33 @@
     font-size: 16px;
     border: 0;  
     cursor: pointer;
+    transition: all .5s;
+}
+.featured-button:hover {
+    box-shadow: 2px 1px 31px rgba(254, 254, 254, 0.2);
+    font-size: 17px;
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 885px) {
+    .navbar-content {
+        width: 70%;
+    }
+    .profile-container {
+        width: 30%;
+    }
+    .menu-container {
+        display: none;
+    }
+    .profile-text-container {
+        margin: 0 .8rem;
+        font-size: .8rem;
+    }
+}
+@media screen and (max-width: 970px) {
+    .logo-container {
+        width: 15%;
+    }
 }
 
 /* --------------------------------------------------------------------------- */
@@ -216,6 +264,7 @@
 .movie-list-wrapper {
     position: relative;
     height: 300px;
+    overflow-y: hidden;
 }
 .movie-list {
     display: flex;
